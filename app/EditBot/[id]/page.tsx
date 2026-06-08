@@ -1,4 +1,5 @@
 "use client";
+import { API_BASE_URL } from "../../config";
 import Link from "next/dist/client/link";
 import { useAuth } from "../../context/AuthContext";
 import { useParams, useRouter } from "next/navigation";
@@ -23,7 +24,7 @@ export default function EditBot() {
 
     useEffect(() => {
         if (!user || !id) return;
-        fetch("http://localhost:8080/api/bots", { credentials: "include" })
+        fetch(`${API_BASE_URL}/api/bots`, { credentials: "include" })
             .then(res => res.json())
             .then((bots: any[]) => {
                 const bot = bots.find(b => b.id === Number(id));
@@ -63,7 +64,7 @@ export default function EditBot() {
             setError("Please fill in all fields"); 
             return; 
         }
-        const res = await fetch(`http://localhost:8080/api/bots/${id}`, {
+        const res = await fetch(`${API_BASE_URL}/api/bots/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             credentials: "include",

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../app/config";
 import { useState } from "react";
 
 type BotProps = {
@@ -17,7 +18,7 @@ export default function BotCard({ bot, onDelete, onToggle, onEdit }: BotProps) {
         if (!message.trim()) return;
         setSending(true);
 
-        await fetch(`http://localhost:8080/api/bots/${bot.id}/send`, {
+        await fetch(`${API_BASE_URL}/api/bots/${bot.id}/send`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",

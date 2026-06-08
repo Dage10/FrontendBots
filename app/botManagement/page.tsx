@@ -1,4 +1,5 @@
 "use client";
+import { API_BASE_URL } from "../config";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useState,useEffect } from "react";
@@ -30,18 +31,18 @@ export default function BotManagement() {
     useEffect(() => {
         if (loading) return;
         if (!user) { setBotsLoading(false); return; }
-        fetch("http://localhost:8080/api/bots", { credentials: "include" })
+        fetch(`${API_BASE_URL}/api/bots`, { credentials: "include" })
             .then(res => res.ok ? res.json() : [])
             .then(data => { setBots(data); setBotsLoading(false); });
     }, [user, loading]);
 
     async function handleDelete(id: number) {
-        await fetch(`http://localhost:8080/api/bots/${id}`, { method: "DELETE", credentials: "include" });
+        await fetch(`${API_BASE_URL}/api/bots/${id}`, { method: "DELETE", credentials: "include" });
         setBots(bots.filter(b => b.id !== id));
     }
 
     async function handleToggle(id: number) {
-        await fetch(`http://localhost:8080/api/bots/${id}/state`, { method: "PUT", credentials: "include" });
+        await fetch(`${API_BASE_URL}/api/bots/${id}/state`, { method: "PUT", credentials: "include" });
         setBots(bots.map(b => b.id === id ? { ...b, state: !b.state } : b));
     }
 

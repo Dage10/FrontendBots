@@ -1,4 +1,5 @@
 "use client";
+import { API_BASE_URL } from "../config";
 import Link from "next/dist/client/link";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
@@ -43,7 +44,7 @@ export default function CreateBot() {
             setError("Please fill in all fields"); 
             return;
         }
-        const res = await fetch("http://localhost:8080/api/bots", {
+        const res = await fetch(`${API_BASE_URL}/api/bots`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",

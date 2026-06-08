@@ -1,4 +1,5 @@
 "use client";
+import { API_BASE_URL } from "../config";
 import { createContext, useContext, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 type User = { id: number; username: string; email: string };
@@ -17,7 +18,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/users/me", {
+        fetch(`${API_BASE_URL}/api/users/me`, {
             credentials: "include"
         })
         .then(res => res.ok ? res.json() : null)
@@ -30,7 +31,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
     function logout() {
         setUser(null);
-        fetch("http://localhost:8080/api/users/logout", {
+        fetch(`${API_BASE_URL}/api/users/logout`, {
             method: "POST",
             credentials: "include"
         });

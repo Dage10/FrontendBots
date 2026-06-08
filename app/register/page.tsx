@@ -1,4 +1,5 @@
 "use client"
+import { API_BASE_URL } from "../config";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -27,7 +28,7 @@ export default function Register() {
             return;
         }
         try{
-            const response = await fetch("http://localhost:8080/api/users/register", {
+            const response = await fetch(`${API_BASE_URL}/api/users/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
