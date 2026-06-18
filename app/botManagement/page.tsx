@@ -46,10 +46,9 @@ export default function BotManagement() {
         setBots(bots.map(b => b.id === id ? { ...b, state: !b.state } : b));
     }
 
-    function handleLogout() {
+    async function handleLogout() {
         setLoggingOut(true);
-        logout();
-        router.push("/");
+        await logout();
     }
     
     if (loading) return null;

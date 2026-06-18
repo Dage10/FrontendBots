@@ -29,12 +29,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     function login(user: User) {
          setUser(user); 
     }
-    function logout() {
+    async function logout() {
         setUser(null);
-        fetch(`${API_BASE_URL}/api/users/logout`, {
-            method: "POST",
-            credentials: "include"
-        });
+        try {
+            await fetch(`${API_BASE_URL}/api/users/logout`, {
+                method: "POST",
+                credentials: "include"
+            });
+        } catch {}
         router.push("/");
     }
 

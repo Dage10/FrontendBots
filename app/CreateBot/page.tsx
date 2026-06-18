@@ -58,10 +58,9 @@ export default function CreateBot() {
         }
     }
 
-    function handleLogout() {
+    async function handleLogout() {
         setLoggingOut(true);
-        logout();
-        router.push("/");
+        await logout();
     }
 
     if (loading) return null;

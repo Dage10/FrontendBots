@@ -44,10 +44,9 @@ export default function EditBot() {
             });
     }, [user, id]);
 
-    function handleLogout() {
+    async function handleLogout() {
         setLoggingOut(true);
-        logout();
-        router.push("/");
+        await logout();
     }
 
     function buildExtraConfig() {
