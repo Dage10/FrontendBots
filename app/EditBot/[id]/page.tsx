@@ -24,10 +24,9 @@ export default function EditBot() {
 
     useEffect(() => {
         if (!user || !id) return;
-        fetch(`${API_BASE_URL}/api/bots`, { credentials: "include" })
-            .then(res => res.json())
-            .then((bots: any[]) => {
-                const bot = bots.find(b => b.id === Number(id));
+        fetch(`${API_BASE_URL}/api/bots/${id}`, { credentials: "include" })
+            .then(res => res.ok ? res.json() : null)
+            .then((bot: any) => {
                 if (!bot) return;
                 setName(bot.name);
                 setPlatform(bot.platform);
